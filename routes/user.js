@@ -28,6 +28,7 @@ router.get("/myposts", requireLogin, (req, res) => {
   console.log("user");
   Post.find({ postedBy: req.user._id })
     .populate("postedBy", "_id name")
+    .sort("-createdAt")
     .then((myposts) => {
       res.json({ myposts });
     })
