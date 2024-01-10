@@ -24,7 +24,7 @@ const CreatePost = () => {
   const [resImgs, setResImgs] = useState([]);
   const [resName, setResName] = useState("");
   // const [resLocation, setResLocation] = useState("");
-  const [resDetails, setResDetails] = useState("");
+  const [resDetailsString, setResDetailsString] = useState("");
   const [resImgsDetail, setResImgsDetail] = useState([]);
   const [uploadedImgNum, setUploadedImgNum] = useState(0);
   const [validated, setValidated] = useState(false);
@@ -45,7 +45,7 @@ const CreatePost = () => {
 
   const handleSubmit = (event) => {
     // console.log(resLocation.current.value);
-    // event.preventDefault();
+    event.preventDefault();
 
     const form = event.currentTarget;
     resImgs.length < 1 ? setValidatedImg(false) : setValidatedImg(true);
@@ -129,6 +129,8 @@ const CreatePost = () => {
   };
 
   const uploadPost = () => {
+    let resDetails = resDetailsString.split("\n");
+    console.log(resDetails);
     axios
       .post(
         "/createpost",
@@ -151,7 +153,7 @@ const CreatePost = () => {
         setResImgs([]);
         setResName("");
         // setResLocation("");
-        setResDetails({});
+        setResDetailsString({});
         setResImgsDetail();
         setIsLoading(false);
         navigate("/");
@@ -263,16 +265,16 @@ const CreatePost = () => {
               </Autocomplete>
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="formResDetails">
+            <Form.Group className="mb-3" controlId="formResDetailsString">
               <FloatingLabel controlId="floatingPassword" label="Details">
                 <Form.Control
                   required
                   as="textarea"
                   aria-label="With textarea"
                   placeholder="Details"
-                  value={resDetails}
+                  value={resDetailsString}
                   onChange={(e) => {
-                    setResDetails(e.target.value);
+                    setResDetailsString(e.target.value);
                   }}
                 />
               </FloatingLabel>
