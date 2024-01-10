@@ -312,7 +312,11 @@ const PostDetail = () => {
                           {post.postedBy.name}{" "}
                         </strong>
                       </LinkContainer>
-                      {post.resDetails}
+                      {post.resDetails.map((resDetail) => (
+                        <>
+                          {resDetail} <br />
+                        </>
+                      ))}
                     </Card.Text>
                   </Row>
                   {Array.isArray(allComments) &&
